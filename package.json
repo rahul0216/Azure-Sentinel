@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "@azure/avocado": "^0.6.2",
+    "@octokit/auth-app": "^7.0.0",
+    "@octokit/rest": "^18.12.0",
     "@types/js-yaml": "^3.12.2",
     "@types/mocha": "^7.0.2",
     "jsonschema": "^1.2.6",
@@ -15,7 +17,7 @@
     "prettier": "^1.19.1",
     "simple-git": "3.5.0",
     "ts-node": "^8.6.2",
-    "typescript": "^3.8.3",
+    "typescript": "^4.1.6",
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
@@ -39,5 +41,4 @@
     "url": "https://github.com/Azure/Azure-Sentinel/issues"
   },
   "homepage": "https://github.com/Azure-Sentinel#readme"
-
 }
