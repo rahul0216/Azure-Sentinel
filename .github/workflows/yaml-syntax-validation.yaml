@@ -9,11 +9,24 @@ on:
 jobs:
     YamlFileValidation:
       runs-on: ubuntu-latest
+      env:
+        REPO_OWNER: ${{ github.event.pull_request.head.repo.owner.login }}
+        REPO_NAME: ${{ github.event.pull_request.head.repo.name }}
+        PRNUM: ${{ github.event.pull_request.number }}
+        GITHUBAPPID: ${{ secrets.APPLICATION_ID }}
+        GITHUBAPPINSTALLATIONID: ${{ secrets.APPLICATION_INSTALLATION_ID }}
+        GITHUBAPPPRIVATEKEY: ${{ secrets.APPLICATION_PRIVATE_KEY }}
+        SYSTEM_PULLREQUEST_ISFORK: ${{ github.event.pull_request.head.repo.fork }}
       steps:
       - uses: actions/checkout@v4
-      - run: npm install -g npm@6.14.15;which npm;npm -v
+      - name: Get Diff files
+        run: |
+          DIFF_FILES=$(git diff origin/${{ github.event.pull_request.base.ref }} --name-only ${{ github.event.pull_request.head.ref }})
+          echo "$DIFF_FILES"
+          echo "DIFF_FILES=$DIFF_FILES" >> $GITHUB_ENV
+      - run: npm install -g npm@6.14.18;which npm;npm -v
       - name: npm install
         run: npm install
       - name: YAML File Syntax Validation
-        run: npm run tsc && node .script/yamlFileValidator.js
+        run: npm run tsc && node .script/yamlFileValidator.js 
                       
