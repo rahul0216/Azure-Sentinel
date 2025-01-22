@@ -29,7 +29,7 @@ export async function IsIdHasChanged(filePath: string): Promise<ExitCode> {
 
         const branches = await git.branch();
         console.log(branches);
-        const options = [pr.base.ref, pr.head.ref, "--", filePath];
+        const options = [pr.base.ref, pr.head.ref, '--', filePath];
         console.log(options);
         const diffSummary = await git.diff(options);
         console.log(diffSummary);
