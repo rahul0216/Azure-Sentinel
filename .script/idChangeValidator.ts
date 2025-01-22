@@ -28,6 +28,7 @@ export async function IsIdHasChanged(filePath: string): Promise<ExitCode> {
         }
 
         const options = [pr.base.ref, pr.head.ref, filePath];
+        console.log(options);
         const diffSummary = await git.diff(options);
         console.log(diffSummary);
         const idPosition = diffSummary.search(templateIdRegex);
