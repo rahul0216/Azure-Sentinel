@@ -75,9 +75,8 @@ export async function GetDiffFiles(fileKinds: string[], fileTypeSuffixes?: strin
 
   const filterChangedFiles = changedFiles
     .filter(change => fileKinds.map(kind => kind.toLowerCase()).includes(change.status.toLowerCase()))
-    .map(change => change.filename);
-
-    //.filter(filePath => typeof fileTypeSuffixes === "undefined" || filePath.endsWithAny(fileTypeSuffixes))
+    .map(change => change.filename)
+    .filter(filePath => typeof fileTypeSuffixes === "undefined" || fileTypeSuffixes.some(suffix => filePath.toLowerCase().endsWith(suffix.toLowerCase())));
     //.filter(filePath => typeof filePathFolderPreffixes === "undefined" || filePath.startsWithAny(filePathFolderPreffixes))
     //.filter(filePath => filePath.indexOf(".script/tests") === -1);
   console.log(filterChangedFiles);
