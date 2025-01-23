@@ -26,11 +26,18 @@ export async function IsIdHasChanged(filePath: string): Promise<ExitCode> {
             console.log("Pull Request details couldn't be fetched. If issue persists - please open an issue");
             return ExitCode.ERROR;
         }
-        console.log(pr);
+
         try {
             await git.fetch(['--all']);
         } catch (e) {
             console.error("Error fetching from git:", e);
+        }
+        
+         // Check if the branches exist locally
+        const branches = await git.branch();
+        if (!branches.all.includes(pr.base.ref) || !branches.all.includes(pr.head.ref)) {
+            console.error(`Branches ${pr.base.ref} or ${pr.head.ref} do not exist locally.`);
+            return ExitCode.ERROR;
         }
 
         const options = [pr.base.ref, pr.head.ref, filePath];
