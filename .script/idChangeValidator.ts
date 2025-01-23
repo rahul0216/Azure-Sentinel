@@ -18,7 +18,7 @@ export async function IsIdHasChanged(filePath: string): Promise<ExitCode> {
     //console.log(skipIdsFile + " " + typeof (skipIdsFile));
 
     if (filePath.includes("Detections") || filePath.includes("Analytic Rules")) {
-        //filePath = workingDir + '/' + filePath;
+        filePath = workingDir + '/' + filePath;
         const pr = await GetPRDetails();
         console.log(filePath);
 
