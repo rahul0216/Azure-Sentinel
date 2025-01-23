@@ -27,6 +27,12 @@ export async function IsIdHasChanged(filePath: string): Promise<ExitCode> {
             return ExitCode.ERROR;
         }
 
+        try {
+            await git.fetch();
+        } catch (e) {
+            console.error("Error fetching from git:", e);
+        }
+        
         const options = [pr.base.ref, pr.head.ref, filePath];
         const diffSummary = await git.diff(options);
         const idPosition = diffSummary.search(templateIdRegex);
