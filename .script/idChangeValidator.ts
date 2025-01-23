@@ -20,13 +20,13 @@ export async function IsIdHasChanged(filePath: string): Promise<ExitCode> {
     if (filePath.includes("Detections") || filePath.includes("Analytic Rules")) {
         filePath = workingDir + '/' + filePath;
         const pr = await GetPRDetails();
-        console.log(filePath);
 
         if (typeof pr === "undefined") {
             console.log("Pull Request details couldn't be fetched. If issue persists - please open an issue");
             return ExitCode.ERROR;
         }
 
+        // Fetch the base and head branches before running the diff
         const branches = await git.branch();
         if (!branches.all.includes(pr.base.ref)) {
             try {
@@ -45,8 +45,7 @@ export async function IsIdHasChanged(filePath: string): Promise<ExitCode> {
             }
         }
 
-        const options = [pr.base.ref, pr.head.ref, filePath];
-        console.log(options);  
+        const options = [pr.base.ref, pr.head.ref, filePath]; 
         const diffSummary = await git.diff(options);
         const idPosition = diffSummary.search(templateIdRegex);
         const idHasChanged = idPosition > 0;
