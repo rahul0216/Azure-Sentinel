@@ -15,15 +15,15 @@ export async function IsIdHasChanged(filePath: string): Promise<ExitCode> {
     const skipValidationCheckFilePath = workingDir + "/.script/tests/idChangeValidatorTest/SkipIdValidationsTemplates.json";
     console.log("skipValidationCheckFilePath: " + skipValidationCheckFilePath);
     const skipIdsFile = JSON.parse(readFileSync(skipValidationCheckFilePath, 'utf8'));
-    console.log(skipIdsFile + " " + typeof (skipIdsFile));
+    //console.log(skipIdsFile + " " + typeof (skipIdsFile));
 
     if (filePath.includes("Detections") || filePath.includes("Analytic Rules")) {
-        filePath = workingDir + '/' + filePath;
+        //filePath = workingDir + '/' + filePath;
         const pr = await GetPRDetails();
         console.log(filePath);
 
         if (typeof pr === "undefined") {
-            console.log("Azure DevOps CI for a Pull Request wasn't found. If issue persists - please open an issue");
+            console.log("Pull Request details couldn't be fetched. If issue persists - please open an issue");
             return ExitCode.ERROR;
         }
 
