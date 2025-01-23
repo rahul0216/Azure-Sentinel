@@ -27,17 +27,22 @@ export async function IsIdHasChanged(filePath: string): Promise<ExitCode> {
             return ExitCode.ERROR;
         }
 
-        try {
-            await git.fetch(['--all']);
-        } catch (e) {
-            console.error("Error fetching from git:", e);
-        }
-        
-         // Check if the branches exist locally
         const branches = await git.branch();
-        if (!branches.all.includes(pr.base.ref) || !branches.all.includes(pr.head.ref)) {
-            console.error(`Branches ${pr.base.ref} or ${pr.head.ref} do not exist locally.`);
-            return ExitCode.ERROR;
+        if (!branches.all.includes(pr.base.ref)) {
+            try {
+                await git.fetch(['origin', pr.base.ref + ':' + pr.base.ref]);
+            } catch (e) {
+                console.error(`Error fetching branch ${pr.base.ref} from git:`, e);
+                return ExitCode.ERROR;
+            }
+        }
+        if (!branches.all.includes(pr.head.ref)) {
+            try {
+                await git.fetch(['origin', pr.head.ref + ':' + pr.head.ref]);
+            } catch (e) {
+                console.error(`Error fetching branch ${pr.head.ref} from git:`, e);
+                return ExitCode.ERROR;
+            }
         }
 
         const options = [pr.base.ref, pr.head.ref, filePath];
