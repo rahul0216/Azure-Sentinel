@@ -56,8 +56,6 @@ jobs:
       with:
         dotnet-version: | 
           3.0.x
-          4.0.x
-          5.0.x
           6.0.x
           7.0.x
           8.0.x
