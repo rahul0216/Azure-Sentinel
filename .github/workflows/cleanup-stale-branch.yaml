@@ -10,7 +10,9 @@ on:
     - cron: '0 4 * * *'
 
 permissions:
+  actions: read
   contents: write
+  pull-requests: read
 
 jobs:
   cleanup_stale_branches:
@@ -19,16 +21,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cleanup Stale Branches
-        uses: crazy-matt/manage-stale-branches@c1b2156178222eaf8bc7f8a4bf7084595b3e8968
+        uses: fpicalausa/remove-stale-branches@7c4f2afe88a36c0f9114cd958380979b9d7323fb
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
-          stale-duration: 1d
-          suggested-duration: 1d
-          concurrency: 2 
+          days-before-branch-stale: 5
+          days-before-branch-delete: 1
+          operations-per-run: 2
           dry-run: true
-          archive-stale: true
-          rate-limit-threshold: 20
-          exclude-patterns: |
-            master
-            ^((?!dependabot))
-            ^((?!release))
+          ignore-branches-with-open-prs: true
+          stale-branch-message: '@{author} Your branch [{branchName}]({branchUrl}) has not been updated in the last 5 days and is marked as stale. It will be removed in 1 day.\r\nIf you want to keep this branch around, delete this comment or add new commits to this branch.'
+          exempt-branches-regex: '^(main|master|dependabot/.*|release/.*)$'
