@@ -31,3 +31,4 @@ jobs:
           ignore-branches-with-open-prs: true
           stale-branch-message: '@{author} Your branch [{branchName}]({branchUrl}) has not been updated in the last 5 days and is marked as stale. It will be removed in 1 day.\r\nIf you want to keep this branch around, delete this comment or add new commits to this branch.'
           exempt-branches-regex: '^(main|master|dependabot/.*|release/.*)$'
+
