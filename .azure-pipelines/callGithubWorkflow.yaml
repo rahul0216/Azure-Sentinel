@@ -13,7 +13,6 @@ jobs:
   - logoValidator
   - NonAsciiValidations
   - PlaybooksValidations
-  - sampleDataValidator
   - WorkbooksTemplateValidations
   - WorkbooksValidations
   - ContentValidations
