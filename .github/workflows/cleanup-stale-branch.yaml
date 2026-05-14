@@ -10,25 +10,26 @@ on:
     - cron: '0 4 * * *'
 
 permissions:
-  actions: read
   contents: write
+  actions: read
   pull-requests: read
 
 jobs:
   cleanup_stale_branches:
-  # Only run if the repository is not archived
-    if: github.event.repository.archived == false 
+  # Only run if the repository is not a fork and not archived
+    if: github.event.repository.fork == false && github.event.repository.archived == false
     runs-on: ubuntu-latest
     steps:
       - name: Cleanup Stale Branches
         uses: fpicalausa/remove-stale-branches@7c4f2afe88a36c0f9114cd958380979b9d7323fb
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
-          days-before-branch-stale: 5
-          days-before-branch-delete: 1
-          operations-per-run: 2
+          days-before-branch-stale: 90
+          days-before-branch-delete: 30
+          operations-per-run: 50
           dry-run: false
           ignore-branches-with-open-prs: true
-          stale-branch-message: '@{author} Your branch [{branchName}]({branchUrl}) has not been updated in the last 5 days and is marked as stale. It will be removed in 1 day.\r\nIf you want to keep this branch around, delete this comment or add new commits to this branch.'
+          stale-branch-message: |
+            Dear @{author}, Your branch [{branchName}]({branchUrl}) has not been updated in the last {daysBeforeBranchStale} days and is marked as stale. It will be removed in {daysBeforeBranchDelete} days.
+            If you want to keep this branch around, delete this comment or add new commits to this branch.
           exempt-branches-regex: '^(main|master|dependabot/.*|release/.*)$'
-
