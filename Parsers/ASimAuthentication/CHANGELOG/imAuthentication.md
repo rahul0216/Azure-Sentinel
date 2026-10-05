@@ -1,5 +1,34 @@
 # Changelog for imAuthentication.yaml
 
+## Version 0.3.21
+
+- (2026-09-30) Add the Salesforce Login History Authentication filtering parser. [PR #15225](https://github.com/Azure/Azure-Sentinel/pull/15225)
+
+## Version 0.3.20
+
+- (2026-09-25) Add the Aruba Networks ClearPass Authentication filtering parser. [PR #15192](https://github.com/Azure/Azure-Sentinel/pull/15192)
+
+## Version 0.3.19
+
+- (2026-09-24) Add the Oracle OCI Authentication filtering parser. [PR #15122](https://github.com/Azure/Azure-Sentinel/pull/15122)
+
+## Version 0.3.18
+
+- (2026-09-17) Add the Wiz Cloud Authentication filtering parser. [PR #15016](https://github.com/Azure/Azure-Sentinel/pull/15016)
+
+## Version 0.3.17
+
+- (2026-09-14) Add the Alibaba Cloud ActionTrail Authentication filtering parser.  - [PR #15120](https://github.com/Azure/Azure-Sentinel/pull/15120)
+
+## Version 0.3.16
+
+- (2026-07-16) Add the Palo Alto Prisma Cloud Compute Authentication filtering parser.
+- (2026-07-17) Correct the Palo Alto PanOS disabled-parser watchlist key.
+
+## Version 0.3.15
+
+- (2026-07-16) Add parser Google Workspace Logins Authentication - [PR #14638](https://github.com/Azure/Azure-Sentinel/pull/14638)
+
 ## Version 0.3.14
 
 - (2026-06-29) Add parser Cisco FTD/Firepower from Syslog - [PR #14581](https://github.com/Azure/Azure-Sentinel/pull/14581)
@@ -82,4 +111,3 @@
 ## Version 0.0
 
 - (2021-10-21) Adding parameters to Authentication + 1 expansion - [PR #3235](https://github.com/Azure/Azure-Sentinel/pull/3235)
-
